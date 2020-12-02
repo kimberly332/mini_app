@@ -1,7 +1,7 @@
 <?php 
     $db_dsn = array( 
         'host' => 'localhost',
-        'dbname' => 'IDP_ProfData',
+        'dbname' => 'db_mini_cooper',
         'charset' => 'utf8'
     );
 

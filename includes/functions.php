@@ -5,7 +5,7 @@
     $result = array();
 
     function getAllUsers($conn) {
-        $query = "SELECT * FROM profData";
+        $query = "SELECT * FROM tbl_mini_cooper";
 
         $runQuery = $conn->query($query);
 
@@ -18,7 +18,7 @@
     }
 
     function getSingleUser($conn, $target) {
-        $query = "SELECT * FROM profData WHERE id=" . $target . "";
+        $query = "SELECT * FROM tbl_mini_cooper WHERE id=" . $target . "";
 
         $runQuery = $conn->query($query);
 
