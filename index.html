@@ -29,11 +29,11 @@
             </ul>
         </nav>
         <main>
-            <!-- <mini-card @showmydata="showProfData" v-for="mini in cars" :mini="mini" :key="mini.id"></mini-card> -->
-            <img v-bind:src="'images/' + image_url" alt="Landing Image">
-            <h2>{{ model }}</h2>
-            <h3>{{ price }}</h3>
-            <p>{{ detail }}</p>
+            <!-- information would be changed here -->
+            <img :src="'images/' + current_image_url" alt="Landing Image">
+            <h2> {{ current_model }} </h2>
+            <h3> {{ current_price }} </h3>
+            <p> {{ current_detail }} </p>
         </main>
         <div id="sidebar">
             <h2>Stay In The Know.</h2>
@@ -56,9 +56,9 @@
                 <a href="#"><i class="fab fa-youtube"></i></a>
             </div>        
         </div>
-        <div @click="clickedCard($event)" id="content1"><img src="images/mini_3_door_showcase.png" alt="Mini 3 Door Image"></div>
-        <div @click="clickedCard($event)" id="content2"><img src="images/mini_5_door_showcase.png" alt="Mini 5 Door Image"></div>
-        <div @click="clickedCard($event)" id="content3"><img src="images/mini_all4_showcase.png" alt="Mini All 4 Image"></div>
+        
+        <!-- trigger to change information -->
+        <mini-card @showmydata="showMiniData" v-for="mini in cars" :mini="mini" :key="mini.id"></mini-card>
 
         <footer>
             <p>&copy; 2020 MINI Canada.</p>

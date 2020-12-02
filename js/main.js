@@ -1,5 +1,5 @@
 import { fetchData } from "./components/TheDataMiner.js";
-// import MiniCard from "./components/TheMiniCard.js";
+import MiniCard from "./components/TheMiniCard.js";
 
 (() => {
 
@@ -10,23 +10,20 @@ import { fetchData } from "./components/TheDataMiner.js";
         data: {
             cars: [],
             
-            car_id: 0,
-
-            model: "",
-            price: "",
-            image_url: "mini_cooper_main.jpg",
-            detail: ""
+            current_model: "",
+            current_price: "",
+            current_image_url: "mini_cooper_main.jpg",
+            current_detail: ""
         },
 
         // this is the "mounted" lifecycle hook. Vue is done creating itself, and has attached itself, and has attached itself to the "app" div on the page
         mounted: function() {
             console.log("Vue is mounted, trying a fetch for the initial data");
             
-            fetchData("./includes/index.php")
+            fetchData("./includes/index.php") // fetch data from database, store into this.cars 
                 .then(data => {
                     // push the mini data into cars array
                     data.forEach(mini => this.cars.push(mini));
-                    console.log(this.cars);
                 })
                 .catch(err => alert(err));
         },
@@ -37,28 +34,20 @@ import { fetchData } from "./components/TheDataMiner.js";
         },
 
         methods: {
-            logClicked() {
-                console.log("clicked on a mini name");
-            },
+            showMiniData(target) {
+                console.log("clicked to view mini data", target.model)
 
-            clickedCard(event) {
-                console.log("clikced on the card. need to show data");
-                
-                // figure out which car need to be displayed by finding id
-                this.car_id = parseInt(event.currentTarget.id[event.currentTarget.id.length-1]);
-                
-                // update car info
-                this.model = this.cars[this.car_id-1]["model"];
-                this.price = this.cars[this.car_id-1]["price"];
-                this.image_url = this.cars[this.car_id-1]["image"];
-                this.detail = this.cars[this.car_id-1]["detail"];
-                
+                // update data
+                this.current_model = target.model;
+                this.current_price = target.price;
+                this.current_image_url = target.image;
+                this.current_detail = target.detail;
 
-            },
+            }
         },
 
-        // components: {
-        //     "mini-card": MiniCard
-        // }
+        components: {
+            "mini-card": MiniCard
+        }
     }).$mount("#app"); // also connects Vue to your wrapper in HTML
 })();

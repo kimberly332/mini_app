@@ -4,30 +4,30 @@ export default {
         props: ["mini"],
 
         // data needs to be a function inside a component
-        // data: function() {
-        //     return {
-        //         myName: this.mini.name,
-        //         myRole: this.mini.role,
-        //         program: "IDP"
-        //     }
-        // },
+        data: function() {
+            return {
+                // store variables
+                mini_id: this.mini.id,
+                mini_img_og: this.mini.image_og,
+                mini_model: this.mini.model
+            }
+        },
 
         template: 
-        `<div>
-            <img :src="'images/' +  mini.image" :alt='mini.model + " image"'>
-            <h2>{{ mini.model }}</h2>
-            <h3>All-Inclusive Price: {{ mini.price}}</h3>
-            <p>{{ mini.detail }}</p>
-        </div>`,
+         `
+         <div @click="clickedCard()" :id="'content' + mini_id"><img :src="'images/' + mini_img_og" :alt="mini_model + 'Images'"></div>
+         `,
         
         created: function() {
             console.log(`created ${this.mini.model}'s card`);
         },
 
         methods: {
-            logClicked() {
-                console.log(`fired from inside ${this.mini.name}'s the component!`);
+            clickedCard() {
+                console.log("clikced on the card. need to show data");
+
+                // deliver data to parent
                 this.$emit("showmydata", this.mini);
-            }
+            },
         }
 }
