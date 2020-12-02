@@ -62,6 +62,10 @@ html {
   display: none;
 }
 
+.show-bio {
+  display: block !important;
+}
+
 body {
   background-color: var(--clr-gray100);
   background: url("../images/bg.jpg") no-repeat center center fixed;
@@ -81,20 +85,27 @@ body .container {
   font-family: "Inter", sans-serif;
   text-transform: uppercase;
   font-size: 12px;
-  color: #004d40;
+  color: white;
   text-align: center;
 }
 body .container nav {
   grid-area: nav;
 }
 body .container main {
+  background-color: rgba(0, 0, 0, 0.8);
   grid-area: main;
   border-radius: var(--main-radius);
+  text-transform: none;
 }
 body .container main img {
   max-width: 100%;
   max-height: 100%;
   border-radius: var(--main-radius);
+}
+body .container main p {
+  text-align: left;
+  margin: 2% 3%;
+  line-height: 1.5rem;
 }
 body .container #sidebar {
   background-color: rgba(0, 0, 0, 0.8);
@@ -104,7 +115,7 @@ body .container #sidebar {
 }
 body .container #sidebar h2 {
   color: white;
-  margin-top: 8%;
+  margin-top: 10%;
 }
 body .container #sidebar p {
   color: white;
@@ -143,16 +154,18 @@ body .container #sidebar .notice {
   color: lightgray;
   font-weight: lighter;
   margin-top: 10%;
+  font-size: 1vw;
 }
 body .container #sidebar h3 {
   color: white;
+  margin-top: 50%;
 }
 body .container #sidebar .social {
   text-decoration: none;
 }
 body .container #sidebar .social a {
   color: white;
-  font-size: 1.5rem;
+  font-size: 2vw;
   margin: 15px;
 }
 body .container #sidebar .social a:hover {

@@ -1,5 +1,5 @@
 import { fetchData } from "./components/TheDataMiner.js";
-// import ProfCard from "./components/TheProfCard.js";
+// import MiniCard from "./components/TheMiniCard.js";
 
 (() => {
 
@@ -8,18 +8,14 @@ import { fetchData } from "./components/TheDataMiner.js";
         //el: "#app",
 
         data: {
-            message: "Hello from Vue!",
-            anotherMessage: "more text, so simple! much winning",
-            removeAformat: true, 
-            showBioData: false,
-            profs: [],
-            currentProfData: {}
+            cars: [],
+            
+            car_id: 0,
 
-            // profs: [
-            //     { name: "Justin", role: "coordinator", nickname: "nitsuJ" },
-            //     { name: "John", role: "prof", nickname: "super chill" },
-            //     { name: "Joe", role: "prof", nickname: "Teddy Bear" },
-            // ]
+            model: "",
+            price: "",
+            image_url: "mini_cooper_main.jpg",
+            detail: ""
         },
 
         // this is the "mounted" lifecycle hook. Vue is done creating itself, and has attached itself, and has attached itself to the "app" div on the page
@@ -28,10 +24,11 @@ import { fetchData } from "./components/TheDataMiner.js";
             
             fetchData("./includes/index.php")
                 .then(data => {
-                    // push the prof data into profs array
-                    data.forEach(prof => this.profs.push(prof));
+                    // push the mini data into cars array
+                    data.forEach(mini => this.cars.push(mini));
+                    console.log(this.cars);
                 })
-                .catch(err => console.error(err));
+                .catch(err => alert(err));
         },
 
         // run a method when you change our view (update the DOM with Vue)
@@ -41,40 +38,27 @@ import { fetchData } from "./components/TheDataMiner.js";
 
         methods: {
             logClicked() {
-                console.log("clicked on a prof name");
+                console.log("clicked on a mini name");
             },
 
-            clickedHeader() {
-                console.log("clikced on the header");
+            clickedCard(event) {
+                console.log("clikced on the card. need to show data");
+                
+                // figure out which car need to be displayed by finding id
+                this.car_id = parseInt(event.currentTarget.id[event.currentTarget.id.length-1]);
+                
+                // update car info
+                this.model = this.cars[this.car_id-1]["model"];
+                this.price = this.cars[this.car_id-1]["price"];
+                this.image_url = this.cars[this.car_id-1]["image"];
+                this.detail = this.cars[this.car_id-1]["detail"];
+                
+
             },
-
-            showProfData(target) {
-                debugger;
-                
-                // remove this prof from the prods array
-                console.log("clicked to view prof bio data", target, target.name);
-                // the "this" keyword inside a vue instance REFERS to the Vue instance itself by default
-                
-                // toggle the property between true and false using a ternary statement
-                this.showBioData = this.showBioData ? false : true;
-
-                // make the selected prof's data visible
-                this.currentProfData = target;
-            },
-
-            removeProf(target) {
-                // remove this prof from the prods array
-                console.log("clicked to remove prof", target, target.name);
-                // the "this" keyword inside a vue instance REFERS to the Vue instance itself by default
-                
-                // make the selected prof's data visible
-                // this.profs.splice(this.profs.indexOf(target), 1);
-                this.$delete(this.profs, target);
-            }
         },
 
-        components: {
-            "prof-card": ProfCard
-        }
+        // components: {
+        //     "mini-card": MiniCard
+        // }
     }).$mount("#app"); // also connects Vue to your wrapper in HTML
 })();
